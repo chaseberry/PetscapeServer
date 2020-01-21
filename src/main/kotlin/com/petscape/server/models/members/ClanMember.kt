@@ -21,4 +21,13 @@ class ClanMember {
 
     val splits: Int = 0
 
+    lateinit var pets: List<PetDrop>
+        private set
+
+    //TODO skills
+
+    //TODO boss kcs
+
+    //TODO clues
+
 }

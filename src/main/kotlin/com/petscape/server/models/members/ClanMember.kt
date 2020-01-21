@@ -28,9 +28,9 @@ class ClanMember {
     lateinit var pets: List<PetDrop>
         private set
 
-    //TODO skills
+    //TODO skills vs totalLevel
 
-    //TODO boss kcs
+    //TODO boss kcs vs totalKc
 
     //TODO clues
 

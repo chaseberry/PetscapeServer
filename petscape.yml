@@ -1,5 +1,0 @@
-logging:
-  appenders:
-    - type: console
-      threshold: DEBUG
-      target: stdout

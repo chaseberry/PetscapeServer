@@ -5,4 +5,7 @@ import io.dropwizard.Configuration
 import javax.validation.constraints.NotEmpty
 
 
-class PetscapeConfiguration : Configuration()
+class PetscapeConfiguration : Configuration() {
+    lateinit var username: String
+    lateinit var password: String
+}

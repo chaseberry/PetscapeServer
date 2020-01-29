@@ -11,8 +11,14 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
     implementation "io.dropwizard:dropwizard-core:2.0.0"
-    implementation 'org.mongodb:mongodb-driver:3.8.1'
+    implementation "io.dropwizard:dropwizard-auth:2.0.0"
+
+    implementation "org.mongodb:mongodb-driver:3.12.1"
+    implementation "org.litote.kmongo:kmongo:3.11.2"
+
+    implementation "at.favre.lib:bcrypt:0.9.0"
 }
 
 compileKotlin {

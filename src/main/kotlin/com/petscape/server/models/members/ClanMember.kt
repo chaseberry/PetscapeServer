@@ -1,10 +1,12 @@
 package com.petscape.server.models.members
 
+import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 import java.util.*
 
 class ClanMember {
 
+    @BsonId
     lateinit var _id: ObjectId
         private set
 

@@ -53,4 +53,12 @@ class MemberResource(val database: MongoDatabase) {
         return ok(member)
     }
 
+    @PUT
+    @Path("/{id}/last-seen")
+    fun updateLastSeen(@PathParam("id") id: String): Response {
+        MemberReference.from(id).updateLastSeen(database)
+        
+        return noContent()
+    }
+
 }

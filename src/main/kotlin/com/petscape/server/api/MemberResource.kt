@@ -4,6 +4,7 @@ import com.mongodb.client.MongoDatabase
 import com.petscape.server.*
 import com.petscape.server.models.members.MemberStatus
 import com.petscape.server.models.members.MinimalClanMember
+import com.petscape.server.mongo.MemberReference
 import com.petscape.server.mongo.PetscapeCollection
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
@@ -47,7 +48,9 @@ class MemberResource(val database: MongoDatabase) {
     @Path("/{id}")
     fun getMember(@PathParam("id") id: String): Response {
 
-        return noContent()
+        val member = MemberReference.from(id).get(database) ?: return notFound("No member found matching $id")
+
+        return ok(member)
     }
 
 }

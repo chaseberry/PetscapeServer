@@ -6,6 +6,7 @@ import com.petscape.server.get
 import com.petscape.server.models.members.ClanMember
 import org.bson.Document
 import org.bson.types.ObjectId
+import java.lang.reflect.Member
 import java.util.*
 
 class MemberReference(private val ref: Reference) {
@@ -39,5 +40,17 @@ class MemberReference(private val ref: Reference) {
                 )
             )
         )
+    }
+
+    companion object {
+        fun from(str: String): MemberReference {
+            val ref = try {
+                Reference._id(ObjectId(str))
+            } catch (e: IllegalArgumentException) {
+                Reference.ign(str)
+            }
+
+            return MemberReference(ref)
+        }
     }
 }

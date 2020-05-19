@@ -12,6 +12,8 @@ fun ok(body: Any? = null) = Response.ok(body).build()
 
 fun noContent() = Response.noContent().build()
 
+fun notFound(msg: String? = null) = Response.status(404).entity(mapOf("error" to msg)).build()
+
 fun doc(vararg elements: Pair<String, Any?>): Document {
     val d = Document()
     elements.forEach { d.put(it.first, it.second) }

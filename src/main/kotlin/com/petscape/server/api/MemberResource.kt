@@ -1,13 +1,10 @@
 package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.doc
-import com.petscape.server.get
+import com.petscape.server.*
 import com.petscape.server.models.members.MemberStatus
 import com.petscape.server.models.members.MinimalClanMember
 import com.petscape.server.mongo.PetscapeCollection
-import com.petscape.server.noContent
-import com.petscape.server.ok
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
@@ -18,10 +15,21 @@ class MemberResource(val database: MongoDatabase) {
 
     @GET
     fun getAllMembers(@QueryParam("query") query: String?): Response {
+
+        val filter = doc(
+            "status" to MemberStatus.active
+        )
+
+        query?.let {
+            val str = it.regexify()
+            filter["\$or"] = listOf(
+                doc("ign" to str),
+                doc("discordName" to str)
+            )
+        }
+
         val members = database[PetscapeCollection.clanMembers].find(
-            doc(
-                "status" to MemberStatus.active
-            ),
+            filter,
             MinimalClanMember::class.java
         ).projection(
             doc(

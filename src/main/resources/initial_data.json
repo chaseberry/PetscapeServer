@@ -32,12 +32,12 @@
       },
       {
         "item": "Jar of Miasma",
-        "file": "TODO",
+        "file": "jar_of_miasma.png",
         "drop_rate": 984
       },
       {
         "item": "Abyssal Orphan",
-        "file": "TODO",
+        "file": "abyssal_orphan.png",
         "drop_rate": 2560
       }
     ]
@@ -80,12 +80,12 @@
       },
       {
         "item": "Jar of Chemicals",
-        "file": "TODO",
+        "file": "jar_of_chemicals.png",
         "drop_rate": 2000
       },
       {
         "item": "Ikkle Hydra",
-        "file": "TODO",
+        "file": "ikkle_hydra.png",
         "drop_rate": 3000
       }
     ]
@@ -118,7 +118,7 @@
       },
       {
         "item": "Callisto Cub",
-        "file": "TODO",
+        "file": "callisto_cub.png",
         "drop_rate": 2000
       }
     ]
@@ -156,12 +156,12 @@
       },
       {
         "item": "Jar of Souls",
-        "file": "TODO",
+        "file": "jar_of_souls.png",
         "drop_rate": 2000
       },
       {
         "item": "Hellpuppy",
-        "file": "TODO",
+        "file": "hellpuppy.png",
         "drop_rate": 3000
       }
     ]
@@ -188,8 +188,8 @@
         "drop_rate": 200
       },
       {
-        "item": "Pet Chaos Elemental",
-        "file": "TODO",
+        "item": "Chaos Elemental Jr.",
+        "file": "chaos_elemental_jr.png",
         "drop_rate": 300
       }
     ]
@@ -234,7 +234,7 @@
   },
   {
     "name": "Corporeal Beast",
-    "file": "corporeal_beast.webp",
+    "file": "corporeal_beast.png",
     "wilderness": false,
     "slayer_level": 0,
     "drops": [
@@ -250,7 +250,7 @@
       },
       {
         "item": "Elysian Sigil",
-        "file": "elysian_sigil.webp",
+        "file": "elysian_sigil.png",
         "drop_rate": 4095
       },
       {
@@ -265,12 +265,12 @@
       },
       {
         "item": "Spectral Sigil",
-        "file": "spectral_sigil.webp",
+        "file": "spectral_sigil.png",
         "drop_rate": 1365
       },
       {
         "item": "Spirit Shield",
-        "file": "spirit_shield.webp",
+        "file": "spirit_shield.png",
         "drop_rate": 64
       }
     ]
@@ -445,12 +445,12 @@
       },
       {
         "item": "Jar of Stone",
-        "file": "TODO",
+        "file": "jar_of_stone.png",
         "drop_rate": 5000
       },
       {
         "item": "Noon",
-        "file": "TODO",
+        "file": "noon.png",
         "drop_rate": 3000
       }
     ]
@@ -516,7 +516,7 @@
       },
       {
         "item": "Prince Black Dragon",
-        "file": "prince_black_dragon.webp",
+        "file": "prince_black_dragon.png",
         "drop_rate": 3000
       },
       {
@@ -549,12 +549,12 @@
       },
       {
         "item": "Jar of Dirt",
-        "file": "TODO",
+        "file": "jar_of_dirt.png",
         "drop_rate": 1000
       },
       {
         "item": "Pet Kraken",
-        "file": "TODO",
+        "file": "pet_kraken.png",
         "drop_rate": 3000
       }
     ]
@@ -587,7 +587,7 @@
       },
       {
         "item": "Kree'Arra Jr.",
-        "file": "kree_arra_jr.webp",
+        "file": "kree_arra_jr.png",
         "drop_rate": 5000
       },
       {
@@ -648,7 +648,7 @@
       },
       {
         "item": "Sarachnis Cudgel",
-        "file": "sarachnis_cudgel.webp",
+        "file": "sarachnis_cudgel.png",
         "drop_rate": 0
       },
       {
@@ -714,7 +714,7 @@
       },
       {
         "item": "Pet Smoke Devil",
-        "file": "TODO",
+        "file": "pet_smoke_devil.png",
         "drop_rate": 3000
       }
     ]
@@ -780,7 +780,7 @@
       },
       {
         "item": "Vet'ion Jr.",
-        "file": "TODO",
+        "file": "vetion_jr.png",
         "drop_rate": 2000
       }
     ]
@@ -803,12 +803,12 @@
       },
       {
         "item": "Jar of Decay",
-        "file": "TODO",
+        "file": "jar_of_decay.png",
         "drop_rate": 3000
       },
       {
         "item": "Vorki",
-        "file": "TODO",
+        "file": "vorki.png",
         "drop_rate": 3000
       }
     ]
@@ -846,12 +846,12 @@
       },
       {
         "item": "Jar of Swamp",
-        "file": "TODO",
+        "file": "jar_of_swamp.png",
         "drop_rate": 3000
       },
       {
         "item": "Pet snakeling",
-        "file": "TODO",
+        "file": "pet_snakeling.png",
         "drop_rate": 4000
       }
     ]

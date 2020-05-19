@@ -14,6 +14,8 @@ import com.petscape.server.api.*
 import com.petscape.server.auth.PetscapeAuthenticator
 import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
+import com.petscape.server.health.HealthCheckResource
+import com.petscape.server.health.ResourcesHealthCheck
 import com.petscape.server.models.Boss
 import io.dropwizard.Application
 import io.dropwizard.auth.AuthDynamicFeature
@@ -77,19 +79,23 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
             .setRealm("Authentication")
             .buildAuthFilter()
 
+        environment.healthChecks().register("resources", ResourcesHealthCheck(database))
+
         environment.jersey().register(AuthDynamicFeature(auth))
         environment.jersey().register(NewBingoGameResource(database))
         environment.jersey().register(NewCustomBingoGameResource(database))
         environment.jersey().register(AddBingoCardResource(database))
         environment.jersey().register(CompleteSquareResource(database))
         environment.jersey().register(UpdateNotesResource(database))
+        environment.jersey().register(GetWinnersResource(database))
+        environment.jersey().register(GetCardResource(database))
+        environment.jersey().register(GetCardImageResource(database))
+        environment.jersey().register(HealthCheckResource(environment.healthChecks()))
 
         val serializersModule = SimpleModule("serializers", Version.unknownVersion())
             .addSerializer(objectIdSerializer)
 
         environment.objectMapper.registerModule(serializersModule)
-
-//        environment.healthChecks().register()
     }
 
     private fun seedDb() {

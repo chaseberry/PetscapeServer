@@ -23,7 +23,7 @@ class AddBingoCardResource(private val db: MongoDatabase) {
     @POST
     fun addBingoCard(
         @QueryParam("id") @NotNull gameId: ObjectId,
-        @QueryParam("name") @NotEmpty username: String
+        @QueryParam("username") @NotEmpty username: String
     ) : BingoCard {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
         val game = games.findOneById(gameId)

@@ -30,6 +30,7 @@ class CompleteSquareResource(private val db: MongoDatabase) {
         square.completed = true
 
         games.replaceOneById(gameId, game)
+        //todo update whether or not the card is a winner? May depend on game type
         return card
     }
 }

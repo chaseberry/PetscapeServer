@@ -11,7 +11,7 @@ class PetscapeAuthenticator(private val db: MongoDatabase,
                             private val config: PetscapeConfiguration) : Authenticator<BasicCredentials, User> {
 
     override fun authenticate(credentials: BasicCredentials?): Optional<User> {
-        return if (config.username == credentials?.username && config.password == credentials?.password) {
+        return if (config.username == credentials?.username && config.password == credentials.password) {
             Optional.of(User("Petscape CC"))
         } else {
             Optional.empty()

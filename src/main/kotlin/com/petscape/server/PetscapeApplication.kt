@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.module.SimpleModule
+import com.mongodb.MongoClient
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
@@ -17,17 +18,21 @@ import com.petscape.server.auth.User
 import com.petscape.server.health.HealthCheckResource
 import com.petscape.server.health.ResourcesHealthCheck
 import com.petscape.server.models.Boss
+import com.petscape.server.mongo.EnumCodecProvider
 import io.dropwizard.Application
 import io.dropwizard.auth.AuthDynamicFeature
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
+import org.bson.codecs.Codec
 import org.bson.codecs.configuration.CodecRegistries
+import org.bson.codecs.configuration.CodecRegistry
 import org.bson.codecs.pojo.PojoCodecProvider
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
+import java.util.*
 
 
 const val DB_PETSCAPE = "petscape_db"
@@ -54,6 +59,15 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         }
     }
 
+    private val dateSerializer = object : JsonSerializer<Date>() {
+
+        override fun serialize(value: Date, gen: JsonGenerator, serializers: SerializerProvider) {
+            gen.writeNumber(value.time / 1000) //Time in seconds
+        }
+
+        override fun handledType() = Date::class.java
+    }
+
     override fun getName(): String {
         return "petscape-server"
     }
@@ -66,7 +80,14 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
             CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
         )
 
-        val mongoClient = MongoClients.create()
+        val codecs = CodecRegistries.fromRegistries(
+            MongoClient.getDefaultCodecRegistry(),
+            CodecRegistries.fromProviders(EnumCodecProvider())
+        )
+
+        val settings = MongoClientSettings.builder().codecRegistry(codecs).build()
+
+        val mongoClient = MongoClients.create(settings)
         database = mongoClient.getDatabase(DB_PETSCAPE).withCodecRegistry(pojoCodecRegistry)
 
         seedDb()
@@ -90,10 +111,12 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(GetWinnersResource(database))
         environment.jersey().register(GetCardResource(database))
         environment.jersey().register(GetCardImageResource(database))
+        environment.jersey().register(MemberResource(database))
+
         environment.jersey().register(HealthCheckResource(environment.healthChecks()))
 
         val serializersModule = SimpleModule("serializers", Version.unknownVersion())
-            .addSerializer(objectIdSerializer)
+            .addSerializer(objectIdSerializer).addSerializer(dateSerializer)
 
         environment.objectMapper.registerModule(serializersModule)
     }

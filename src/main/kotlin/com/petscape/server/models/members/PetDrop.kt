@@ -1,6 +1,7 @@
 package com.petscape.server.models.members
 
 import org.bson.types.ObjectId
+import java.util.*
 
 class PetDrop {
 
@@ -13,4 +14,6 @@ class PetDrop {
 
     //XP or KC the pet was dropped
     val score: Int? = null
+
+    lateinit var dropDate: Date
 }

@@ -17,6 +17,5 @@ class Pet {
     //Associated boss that drops this pet, if applicable
     val bossId: ObjectId? = null
 
-
-    //Could add drop rate or hours to get or something to calculate peoples 'luck'
+    val dropRate: Int = 0
 }

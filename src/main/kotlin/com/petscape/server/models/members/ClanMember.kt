@@ -30,6 +30,10 @@ class ClanMember {
     lateinit var pets: List<PetDrop>
         private set
 
+    lateinit var status: MemberStatus
+
+    var notes: String? = null
+
     //TODO skills vs totalLevel
 
     //TODO boss kcs vs totalKc

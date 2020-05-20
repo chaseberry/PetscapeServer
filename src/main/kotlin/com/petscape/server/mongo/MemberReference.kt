@@ -26,6 +26,7 @@ class MemberReference(private val ref: Reference) {
     }
 
     fun get(db: MongoDatabase): ClanMember? {
+
         return db[PetscapeCollection.clanMembers].find(ref.query(), ClanMember::class.java).firstOrNull()
     }
 

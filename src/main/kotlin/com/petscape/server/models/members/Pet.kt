@@ -18,4 +18,6 @@ class Pet {
     val bossId: ObjectId? = null
 
     val dropRate: Int = 0
+
+    //TODO image resource?
 }

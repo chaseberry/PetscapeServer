@@ -3,6 +3,7 @@ package com.petscape.server.api
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.*
 import com.petscape.server.api.members.CreateMemberParameters
+import com.petscape.server.api.members.EditMemberParameters
 import com.petscape.server.models.members.ClanMember
 import com.petscape.server.models.members.MemberStatus
 import com.petscape.server.models.members.MinimalClanMember
@@ -57,6 +58,23 @@ class MemberResource(val database: MongoDatabase) {
             PetscapeCollection.clanMembers.name,
             ClanMember::class.java
         ).insertOne(member)
+
+        return ok(member)
+    }
+
+    @PUT
+    @Path("/{id}")
+    fun editMember(@PathParam("id") id: String,
+                   @Valid @NotNull params: EditMemberParameters): Response {
+        val ref = MemberReference.from(id)
+
+        ref.edit(
+            db = database,
+            ign = params.ign,
+            discordName = params.discordName
+        )
+
+        val member = MemberReference.from(id).get(database) ?: return notFound("No member found matching $id")
 
         return ok(member)
     }

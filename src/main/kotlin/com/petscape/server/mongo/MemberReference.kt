@@ -43,6 +43,27 @@ class MemberReference(private val ref: Reference) {
         )
     }
 
+    fun edit(db: MongoDatabase,
+             ign: String? = null,
+             discordName: String? = null) {
+
+        val update = doc()
+
+        ign?.let { update["ign"] = it }
+        discordName?.let { update["discordName"] = it }
+
+        if (update.isEmpty()) {
+            return
+        }
+
+        db[PetscapeCollection.clanMembers].updateOne(
+            ref.query(),
+            doc(
+                "\$set" to update
+            )
+        )
+    }
+
     companion object {
         fun from(str: String): MemberReference {
             val ref = try {

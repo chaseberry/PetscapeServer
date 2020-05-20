@@ -1,5 +1,6 @@
 package com.petscape.server.models.members
 
+import com.petscape.server.api.members.CreateMemberParameters
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 import java.util.*
@@ -13,6 +14,7 @@ class ClanMember {
     lateinit var ign: String
         private set
 
+    //TODO optional?
     lateinit var discordName: String
         private set
 
@@ -39,5 +41,20 @@ class ClanMember {
     //TODO boss kcs vs totalKc
 
     //TODO clues
+
+    companion object {
+        fun create(params: CreateMemberParameters): ClanMember {
+            return ClanMember().apply {
+                _id = ObjectId()
+                ign = params.ign
+                discordName = params.discordName
+                rank = ClanRank.smiley
+                joinDate = Date()
+                lastSeen = Date()
+                pets = params.pets.map { PetDrop.new(it) }
+                status = MemberStatus.active
+            }
+        }
+    }
 
 }

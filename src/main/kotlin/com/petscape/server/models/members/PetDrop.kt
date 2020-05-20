@@ -1,5 +1,6 @@
 package com.petscape.server.models.members
 
+import com.petscape.server.models.Pet
 import org.bson.types.ObjectId
 import java.util.*
 
@@ -9,11 +10,30 @@ class PetDrop {
         private set
 
     //Id of the Pet object
-    lateinit var petId: ObjectId
+    lateinit var pet: Pet
         private set
 
     //XP or KC the pet was dropped
-    val score: Int? = null
+    var score: Int? = null
+        private set
 
-    lateinit var dropDate: Date
+    var dropDate: Date? = null
+        private set
+
+    companion object {
+        fun new(pet: Pet): PetDrop {
+            return PetDrop().apply {
+                _id = ObjectId()
+                this.pet = pet
+            }
+        }
+
+        fun create(pet: Pet, score: Int? = null, date: Date = Date()): PetDrop {
+            return new(pet).apply {
+                this.score = score
+                dropDate = date
+            }
+        }
+
+    }
 }

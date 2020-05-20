@@ -2,10 +2,14 @@ package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.*
+import com.petscape.server.api.members.CreateMemberParameters
+import com.petscape.server.models.members.ClanMember
 import com.petscape.server.models.members.MemberStatus
 import com.petscape.server.models.members.MinimalClanMember
 import com.petscape.server.mongo.MemberReference
 import com.petscape.server.mongo.PetscapeCollection
+import javax.validation.Valid
+import javax.validation.constraints.NotNull
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
@@ -44,6 +48,18 @@ class MemberResource(val database: MongoDatabase) {
         return ok(members)
     }
 
+    @POST
+    fun createMember(@Valid @NotNull params: CreateMemberParameters): Response {
+        val member = ClanMember.create(params)
+
+        database.getCollection(
+            PetscapeCollection.clanMembers.name,
+            ClanMember::class.java
+        ).insertOne(member)
+
+        return ok(member)
+    }
+
     @GET
     @Path("/{id}")
     fun getMember(@PathParam("id") id: String): Response {
@@ -57,7 +73,7 @@ class MemberResource(val database: MongoDatabase) {
     @Path("/{id}/last-seen")
     fun updateLastSeen(@PathParam("id") id: String): Response {
         MemberReference.from(id).updateLastSeen(database)
-        
+
         return noContent()
     }
 

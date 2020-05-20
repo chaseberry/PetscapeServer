@@ -52,6 +52,7 @@ class MemberResource(val database: MongoDatabase) {
     fun createMember(@Valid @NotNull params: CreateMemberParameters): Response {
         val member = ClanMember.create(params)
 
+        //TODO clan member pets might be just a list of strings...
         database.getCollection(
             PetscapeCollection.clanMembers.name,
             ClanMember::class.java

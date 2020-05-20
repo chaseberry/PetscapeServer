@@ -1,13 +1,9 @@
 package com.petscape.server.models.members
 
 import com.petscape.server.models.Pet
-import org.bson.types.ObjectId
 import java.util.*
 
 class PetDrop {
-
-    lateinit var _id: ObjectId
-        private set
 
     //Id of the Pet object
     lateinit var pet: Pet
@@ -21,11 +17,8 @@ class PetDrop {
         private set
 
     companion object {
-        fun new(pet: Pet): PetDrop {
-            return PetDrop().apply {
-                _id = ObjectId()
-                this.pet = pet
-            }
+        fun new(pet: Pet) = PetDrop().apply {
+            this.pet = pet
         }
 
         fun create(pet: Pet, score: Int? = null, date: Date = Date()): PetDrop {

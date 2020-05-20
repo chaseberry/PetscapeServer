@@ -1,8 +1,5 @@
 package com.petscape.server.models
 
-import com.petscape.server.models.GameTag
-import org.bson.types.ObjectId
-
 enum class Pet(val display: String,
                val tags: List<GameTag>,
     //val boss: ?,

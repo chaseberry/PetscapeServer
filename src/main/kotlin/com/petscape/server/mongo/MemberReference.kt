@@ -6,6 +6,7 @@ import com.petscape.server.get
 import com.petscape.server.models.members.ClanMember
 import org.bson.Document
 import org.bson.types.ObjectId
+import org.litote.kmongo.findOne
 import java.lang.reflect.Member
 import java.util.*
 
@@ -44,12 +45,13 @@ class MemberReference(private val ref: Reference) {
     }
 
     fun edit(db: MongoDatabase,
-             ign: String? = null,
+             newIgn: String? = null,
+             currentIgn: String,
              discordName: String? = null) {
 
         val update = doc()
 
-        ign?.let { update["ign"] = it }
+        newIgn?.let { update["ign"] = it }
         discordName?.let { update["discordName"] = it }
 
         if (update.isEmpty()) {
@@ -60,8 +62,18 @@ class MemberReference(private val ref: Reference) {
             ref.query(),
             doc(
                 "\$set" to update
-            )
+            ).also {
+                if (newIgn != null) {
+                    it["\$addToSet"] = doc(
+                        "pastIgns" to currentIgn
+                    )
+                }
+            }
         )
+    }
+
+    fun ign(database: MongoDatabase): String? {
+        return database[PetscapeCollection.clanMembers].findOne(ref.query(), doc("ign" to 1))?.getString("ign")
     }
 
     companion object {

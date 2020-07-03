@@ -68,9 +68,12 @@ class MemberResource(val database: MongoDatabase) {
                    @Valid @NotNull params: EditMemberParameters): Response {
         val ref = MemberReference.from(id)
 
+        val currentIgn = MemberReference.from(id).ign(database) ?: return notFound("No member found matching $id")
+
         ref.edit(
             db = database,
-            ign = params.ign,
+            newIgn = params.ign,
+            currentIgn = currentIgn,
             discordName = params.discordName
         )
 

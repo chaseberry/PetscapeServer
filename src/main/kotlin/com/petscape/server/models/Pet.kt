@@ -31,14 +31,12 @@ enum class Pet(val display: String,
     beaver(
         display = "Beaver",
         tags = listOf(skilling),
-        boss = null,
         dropRate = 24_975_270,
         image = "/pets/Beaver.gif"
     ),
     bloodhound(
         display = "Bloodhound",
         tags = listOf(other),
-        boss = null,
         dropRate = 1000,
         image = "/pets/Bloodhound.gif"
     ),
@@ -59,7 +57,6 @@ enum class Pet(val display: String,
     chompyChick(
         display = "Chompy Chick",
         tags = listOf(other),
-        boss = null,
         dropRate = 500,
         image = "/pets/Chompy Chick.gif"
     ),
@@ -196,7 +193,6 @@ enum class Pet(val display: String,
     penanceQueen(
         display = "Penance Queen",
         tags = listOf(minigame),
-        boss = null,
         dropRate = 1000,
         image = "/pets/Penance Queen.gif"
     ),

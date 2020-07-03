@@ -13,7 +13,7 @@ const val s = "/"
 object FileUtils {
 
     fun loadBoss(boss: Boss): InputStream {
-        return load("bosses$s${boss.file}")
+        return load("bosses$s${boss.image}")
     }
 
     fun loadBoss(boss: LiteBoss): InputStream {
@@ -21,7 +21,7 @@ object FileUtils {
     }
 
     fun loadDrop(drop: Drop): InputStream {
-        return load("items$s${drop.file}")
+        return load("items$s${drop.image}")
     }
 
     fun load(name: String): InputStream {
@@ -35,11 +35,11 @@ object FileUtils {
     }
 
     fun findBoss(boss: Boss): String? {
-        return find("bosses${s}${boss.file}")
+        return find("bosses${s}${boss.image}")
     }
 
     fun findDrop(drop: Drop): String? {
-        return find("items${s}${drop.file}")
+        return find("items${s}${drop.image}")
     }
 
     fun find(name: String): String? {

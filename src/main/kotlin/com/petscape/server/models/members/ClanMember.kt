@@ -14,8 +14,10 @@ class ClanMember {
     lateinit var ign: String
         private set
 
-    //TODO optional?
-    lateinit var discordName: String
+    lateinit var pastIgns: List<String>
+        private set
+
+    var discordName: String? = null
         private set
 
     lateinit var rank: ClanRank
